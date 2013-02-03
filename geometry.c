@@ -180,7 +180,7 @@ bool vertex_rotate(const vertex_id *vs,
   const unsigned len, const double degree,
   const double nx, const double ny, const double nz)
 {
-  const double rad = M_PI * degree / 180.0 / 2.0;
+  const double rad = M_PI_2 * degree / 180.0;
   const double x = nx * sin(rad);
   const double y = ny * sin(rad);
   const double z = nz * sin(rad);

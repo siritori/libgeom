@@ -119,7 +119,7 @@ shape_t *new_sphere(const double r, const unsigned m, const unsigned n)
 {
   shape_t *standard = new_shape();
   for(unsigned i = 0; i < n+1; ++i) {
-    const double theta = i * (M_PI / n) - M_PI / 2;
+    const double theta = i * (M_PI / n) - M_PI_2;
     const vertex_id v = new_vertex(r * cos(theta), r * sin(theta), 0);
     add_vertex(standard, v);
   }
