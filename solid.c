@@ -97,6 +97,25 @@ shape_t *new_revolution(const shape_t *standard, const unsigned m, const unsigne
   return ret;
 }
 
+shape_t *new_cone(const double r, const double height, const unsigned m)
+{
+  shape_t *ret = new_shape();
+  vertex_id top = add_vertex(ret, new_vertex(0, height, 0));
+  vertex_id bottom = add_vertex(ret, new_vertex(0, 0, 0));
+  vertex_id prev = add_vertex(ret, new_vertex(r, 0, 0));
+  vertex_id last = prev;
+  for(unsigned rot = 0; rot < m; ++rot) {
+    const double theta = rot * (2 * M_PI / m);
+    const double x = r * cos(theta);
+    const double z = r * sin(theta);
+    const vertex_id v = add_vertex(ret, new_vertex(x, 0, z));
+    new_face(top, prev, v);
+    prev = v;
+  }
+  new_face(top, prev, last);
+  return ret;
+}
+
 shape_t *new_cylinder(const double r, const double height, const unsigned m)
 {
   shape_t *standard = new_shape();
