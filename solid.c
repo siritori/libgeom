@@ -97,6 +97,18 @@ shape_t *new_revolution(const shape_t *standard, const unsigned m, const unsigne
   return ret;
 }
 
+shape_t *new_cylinder(const double r, const double height, const unsigned m)
+{
+  shape_t *standard = new_shape();
+  add_vertex(standard, new_vertex(0, -height / 2, 0));
+  add_vertex(standard, new_vertex(r, -height / 2, 0));
+  add_vertex(standard, new_vertex(r, height / 2, 0));
+  add_vertex(standard, new_vertex(0, height / 2, 0));
+  shape_t *ret = new_revolution(standard, m, 4);
+  free_shape(standard);
+  return ret;
+}
+
 shape_t *new_taurus(const double offset, const double r,
   const unsigned m, const unsigned n)
 {
