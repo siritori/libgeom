@@ -105,7 +105,7 @@ shape_t *new_taurus(const double offset, const double r,
     const double theta = i * (2*M_PI/n);
     const vertex_id v = new_vertex(
       r*cos(theta)+offset,
-      r*sin(theta)+offset,
+      r*sin(theta),
       0
     );
     add_vertex(standard, v);
@@ -126,7 +126,6 @@ shape_t *new_sphere(const double r, const unsigned m, const unsigned n)
   shape_t *ret = new_revolution(standard, m, n);
   free_shape(standard);
   return ret;
-
 }
 
 bool shape_translate(shape_t *s,
