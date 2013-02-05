@@ -26,7 +26,8 @@ bool make_face(const vertex_id* restrict a, const vertex_id* restrict b,
 
 shape_t *new_revolution(const shape_t *standard, const unsigned m, const unsigned n);
 shape_t *new_cone(const double r, const double height, const unsigned m);
-shape_t *new_cylinder(const double r, const double height, const unsigned m);
+shape_t *new_cylinder(const double r, const double height,
+  const unsigned m, const unsigned rn, const unsigned hn);
 shape_t *new_taurus(const double offset, const double r,
   const unsigned m, const unsigned n);
 shape_t *new_sphere(const double r, const unsigned m, const unsigned n);
