@@ -141,11 +141,7 @@ shape_t *new_taurus(const double offset, const double r,
   shape_t *standard = new_shape();
   for(unsigned i = 0; i < n+1; ++i) {
     const double theta = i * (2*M_PI/n);
-    const vertex_id v = new_vertex(
-      r*cos(theta)+offset,
-      r*sin(theta),
-      0
-    );
+    const vertex_id v = new_vertex(r * cos(theta) + offset, r * sin(theta), 0);
     add_vertex(standard, v);
   }
   shape_t *ret = new_revolution(standard, m, n);
