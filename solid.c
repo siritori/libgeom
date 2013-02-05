@@ -68,11 +68,12 @@ bool make_face(const vertex_id* restrict a, const vertex_id* restrict b,
   return true;
 }
 
-shape_t *new_revolution(const shape_t *standard, const unsigned m, const unsigned n)
+shape_t *new_revolution(const shape_t *standard, const unsigned m)
 {
   shape_t *ret = new_shape();
   shape_t *prev = new_shape();
-  for(unsigned i = 0; i < n+1; ++i) {
+  const unsigned n = standard->num_vertices;
+  for(unsigned i = 0; i < n; ++i) {
     const vertex_id v = standard->vertices[i];
     add_vertex(prev, v);
     add_vertex(ret, v);
@@ -80,7 +81,7 @@ shape_t *new_revolution(const shape_t *standard, const unsigned m, const unsigne
   for(unsigned rot = 1; rot < m; ++rot) {
     shape_t *current = new_shape();
     const double theta = rot * (2 * M_PI / m);
-    for(unsigned i = 0; i < n+1; ++i) {
+    for(unsigned i = 0; i < n; ++i) {
       const vertex_t vs = get_point(standard->vertices[i]);
       const double x = vs.x * cos(theta);
       const double z = vs.x * sin(theta);
@@ -88,11 +89,11 @@ shape_t *new_revolution(const shape_t *standard, const unsigned m, const unsigne
       add_vertex(current, v);
       add_vertex(ret, v);
     }
-    make_face(prev->vertices, current->vertices, n+1);
+    make_face(prev->vertices, current->vertices, n);
     free_shape(prev);
     prev = current;
   }
-  make_face(prev->vertices, standard->vertices, n+1);
+  make_face(prev->vertices, standard->vertices, n);
   free_shape(prev);
   return ret;
 }
@@ -130,7 +131,7 @@ shape_t *new_cylinder(const double r, const double height, const unsigned m, con
   for(unsigned i = 0; i < rn+1; ++i) {
     add_vertex(standard, new_vertex(r - i * r / rn, height / 2, 0));
   }
-  shape_t *ret = new_revolution(standard, m, 2*rn+hn+2);
+  shape_t *ret = new_revolution(standard, m);
   free_shape(standard);
   return ret;
 }
@@ -144,7 +145,7 @@ shape_t *new_taurus(const double offset, const double r,
     const vertex_id v = new_vertex(r * cos(theta) + offset, r * sin(theta), 0);
     add_vertex(standard, v);
   }
-  shape_t *ret = new_revolution(standard, m, n);
+  shape_t *ret = new_revolution(standard, m);
   free_shape(standard);
   return ret;
 }
@@ -157,7 +158,7 @@ shape_t *new_sphere(const double r, const unsigned m, const unsigned n)
     const vertex_id v = new_vertex(r * cos(theta), r * sin(theta), 0);
     add_vertex(standard, v);
   }
-  shape_t *ret = new_revolution(standard, m, n);
+  shape_t *ret = new_revolution(standard, m);
   free_shape(standard);
   return ret;
 }
