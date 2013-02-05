@@ -77,7 +77,7 @@ shape_t *new_revolution(const shape_t *standard, const unsigned m, const unsigne
     add_vertex(prev, v);
     add_vertex(ret, v);
   }
-  for(unsigned rot = 0; rot < m; ++rot) {
+  for(unsigned rot = 1; rot < m; ++rot) {
     shape_t *current = new_shape();
     const double theta = rot * (2 * M_PI / m);
     for(unsigned i = 0; i < n+1; ++i) {
