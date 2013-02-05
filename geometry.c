@@ -184,7 +184,7 @@ bool vertex_rotate(const vertex_id *vs,
   const double x = nx * sin(rad);
   const double y = ny * sin(rad);
   const double z = nz * sin(rad);
-  const double w = cos(rad / 2.0);
+  const double w = cos(rad);
   const double m[3][3] = {
     {1-2*(y*y+z*z), 2*(x*y-z*w)  , 2*(x*z+y*w)  },
     {2*(x*y+z*w)  , 1-2*(z*z+x*x), 2*(y*z-x*w)  },
