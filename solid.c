@@ -166,20 +166,23 @@ shape_t *new_sphere(const double r, const unsigned m, const unsigned n)
   return ret;
 }
 
-bool shape_translate(shape_t *s,
+shape_t *shape_translate(shape_t *s,
   const double x, const double y, const double z)
 {
-  return vertex_translate(s->vertices, s->num_vertices, x, y, z);
+  vertex_translate(s->vertices, s->num_vertices, x, y, z);
+  return s;
 }
 
-bool shape_scale(shape_t *s,
+shape_t *shape_scale(shape_t *s,
   const double x, const double y, const double z)
 {
-  return vertex_scale(s->vertices, s->num_vertices, x, y, z);
+  vertex_scale(s->vertices, s->num_vertices, x, y, z);
+  return s;
 }
 
-bool shape_rotate(shape_t *s, const double degree,
+shape_t *shape_rotate(shape_t *s, const double degree,
   const double x, const double y, const double z)
 {
-  return vertex_rotate(s->vertices, s->num_vertices, degree, x, y, z);
+  vertex_rotate(s->vertices, s->num_vertices, degree, x, y, z);
+  return s;
 }

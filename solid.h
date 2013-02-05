@@ -32,11 +32,11 @@ shape_t *new_taurus(const double offset, const double r,
   const unsigned m, const unsigned n);
 shape_t *new_sphere(const double r, const unsigned m, const unsigned n);
 
-bool shape_translate(shape_t *s,
+shape_t *shape_translate(shape_t *s,
   const double x, const double y, const double z);
-bool shape_scale(shape_t *s,
+shape_t *shape_scale(shape_t *s,
   const double x, const double y, const double z);
-bool shape_rotate(shape_t *s, const double degree,
+shape_t *shape_rotate(shape_t *s, const double degree,
   const double nx, const double ny, const double nz);
 
 #endif
