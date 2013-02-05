@@ -110,20 +110,27 @@ shape_t *new_cone(const double r, const double height, const unsigned m)
     const double z = r * sin(theta);
     const vertex_id v = add_vertex(ret, new_vertex(x, 0, z));
     new_face(top, prev, v);
+    new_face(bottom, prev, v);
     prev = v;
   }
   new_face(top, prev, last);
+  new_face(bottom, prev, last);
   return ret;
 }
 
-shape_t *new_cylinder(const double r, const double height, const unsigned m)
+shape_t *new_cylinder(const double r, const double height, const unsigned m, const unsigned rn, const unsigned hn)
 {
   shape_t *standard = new_shape();
-  add_vertex(standard, new_vertex(0, -height / 2, 0));
-  add_vertex(standard, new_vertex(r, -height / 2, 0));
-  add_vertex(standard, new_vertex(r, height / 2, 0));
-  add_vertex(standard, new_vertex(0, height / 2, 0));
-  shape_t *ret = new_revolution(standard, m, 4);
+  for(unsigned i = 0; i < rn+1; ++i) {
+    add_vertex(standard, new_vertex((double)i * (r / rn), -height / 2, 0));
+  }
+  for(unsigned i = 0; i < hn; ++i) {
+    add_vertex(standard, new_vertex(r, i * (height / hn) - (height / 2), 0));
+  }
+  for(unsigned i = 0; i < rn+1; ++i) {
+    add_vertex(standard, new_vertex(r - i * r / rn, height / 2, 0));
+  }
+  shape_t *ret = new_revolution(standard, m, 2*rn+hn+2);
   free_shape(standard);
   return ret;
 }
